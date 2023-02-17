@@ -1,60 +1,8 @@
 from random import randint
-# from math import gcd  # Поиск наименьшего общего делителя
-
-
-# def is_prime(number):
-#     if number < 2:
-#         return False
-#     return all(number % i != 0 for i in range(2, number))
-
-
-# def primeNumber(digital=4):
-#     while is_prime(digital) != True:
-#         digital = randint(2, 1000)
-#     return digital
-
-
-# def decodeMessage(msg):
-#     asciimessage = list(bytes(msg, 'utf-8'))
-#     return [pow(i, e, n) for i in asciimessage]
-
-
-# def encodedMessage():
-#     arrayText = [chr(pow(i, d, n)) for i in decodeMessage(msg)]
-#     return ''.join(arrayText)
-
-
-# def get_e(e):
-#     while gcd(phi_n, e) != 1:
-#         e = randint(2, 1000)
-#     return e
-
-
-# def get_d(d):
-#     while ((e*d) % phi_n != 1):
-#         d += 1
-#     return d
-
-
-# p, q = primeNumber(), primeNumber()
-
-
-# n = p*q
-# phi_n = (p-1)*(q-1)
-
-# e = get_e(0)
-
-# d = get_d(int(phi_n/e))
-
-
-# msg = input('Enter the text ')
-# print(
-#     f'Decoded messgae: {decodeMessage(msg)}\n You encoded message: {encodedMessage()} ')
-
-
 class RSA:
 
     def __init__(self):
+        #Инициализация переменных
         self.p = self.primeNumber()
         self.q = self.primeNumber()
         self.n = self.p*self.q
@@ -63,11 +11,13 @@ class RSA:
         self.d = self.generate_d()
 
     def checkPrime(self, number):
+        #Проверка на простое ли число
         if number < 2:
             return False
         return all(number % i != 0 for i in range(2, number))
 
     def primeNumber(self, digital=4):
+        #Генерация рандомных чисел
         while self.checkPrime(digital) != True:
             digital = randint(2, 1000)
         return digital
@@ -88,6 +38,7 @@ class RSA:
             d += 1
 
     def gcd(self, x, y):
+        #нахождение НОД
         if (y == 0):
             return x
         else:
@@ -104,6 +55,7 @@ class RSA:
         return ''.join(arrayText)
 
     def print(self):
+        #Вывод пользователю на экран
         decryptText= [str(x) for x in self.encrypt(msg)]
         print(
             f'You encoded messgae: {"".join(decryptText)}\n You decoded message: {self.decrypt()} ')
